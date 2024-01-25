@@ -2,7 +2,7 @@ package ch04.sec03;
 
 public class SwitchValueExample {
 	public static void main(String[] args) {
-		String grade = "b";
+		String grade = "B";
 		
 		int score1 = 0;
 		switch(grade) {
