@@ -42,6 +42,8 @@ public class Resolve3 {
 		
 		sc.close();		
 	}
+	
+	
 	public static void method1() {
 		Scanner sc = new Scanner(System.in);
 		
@@ -57,7 +59,7 @@ public class Resolve3 {
 			switch(sel) {
 			case "1":
 				System.out.print("예금액 > ");
-				m = sc.nextLine();
+				m = sc.nextLine(); // "100000"
 				money += Integer.parseInt(m);
 				break;
 			case "2":
