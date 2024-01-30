@@ -1,6 +1,6 @@
 package ch08.class03;
 
-/* static메서드는 객체를 만들지 않아도 바로 사용가능하다.
+/* static 메서드는 객체를 만들지 않아도 바로 사용가능하다.
  * */
 public class ArithEx {
 	public static void main(String[] args) {
