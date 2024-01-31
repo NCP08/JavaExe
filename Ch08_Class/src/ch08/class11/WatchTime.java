@@ -4,6 +4,7 @@ package ch08.class11;
 public class WatchTime {
 	private int hour, min, sec;
 	
+	//public WatchTime(WatchTime this, int hour, int min, int sec)
 	public WatchTime(int hour, int min, int sec) {
 		System.out.println("this:" + this);
 		this.hour = hour;
@@ -12,7 +13,7 @@ public class WatchTime {
 	}	
 	//public void viewTime(WatchTime this)
 	public void viewTime() {
-		System.out.printf("[%02d:%02d:%02d]\n", hour, min, sec);
+		System.out.printf("[%02d:%02d:%02d]\n", this.hour, this.min, this.sec);
 	}
 	
 	public static void main(String[] args) {
