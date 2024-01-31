@@ -1,4 +1,4 @@
-package javaai.exam04.class07;
+package ch08.class09;
 
 import java.util.Scanner;
 
