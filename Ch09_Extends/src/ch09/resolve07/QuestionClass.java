@@ -9,6 +9,7 @@ import ch09.resolve07.answer01.Mul;
 import ch09.resolve07.answer01.Sub;
 import ch09.resolve07.answer02.Triangle;
 import ch09.resolve07.answer03.ArrayUtility;
+import ch09.resolve07.answer04.ArrayUtility2;
 
 //import ch09.resolve07.answer01.Add;
 //import ch09.resolve07.answer01.Sub;
@@ -159,7 +160,15 @@ public static void answer3(Scanner sc) {
 
 // 4번 문제에 대한 풀이
 public static void answer4(Scanner sc) {
-
+	int[] a = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9 , 10};
+	int[] b = new int[] {5, 9, 7, 3, 11, 12, 15};
+	int[] c = new int[] {20, 21, 22};
+	
+	int[] result = ArrayUtility2.concat(a, c);
+	System.out.println(Arrays.toString(result));
+	
+	int[] result1 = ArrayUtility2.remove(a, b);
+	System.out.println(Arrays.toString(result1));
 	
 }
 
