@@ -2,6 +2,10 @@ package ch08.class09;
 
 import java.util.Scanner;
 
+import ch08.class09.answer01.FruitBuyer;
+import ch08.class09.answer01.FruitSeller;
+import ch08.class09.answer02.ChineseRestaurant;
+
 
 /*
 1.FruitMain클래스에		
@@ -79,6 +83,7 @@ public class QuestionClass {
 			+ "   int square() : 사각형 넓이 리턴\r\n"
 			+ "   void show() : 좌표와 넓이 등 직사각형 정보의 화면 출력\r\n"
 			+ "   boolean equals(Rectangle r) : 인자로 전달된 객체 r과 현 객체가 동일한 좌표의 직사각형이면 true 리턴\r\n"
+			+ "6. Program End~\r\n"
 			+ "";
 	
 	System.out.println("\n\n\n------------------------------------");
@@ -100,12 +105,29 @@ public static int getSelectMenu(Scanner sc) {
 
 // 1번 문제에 대한 풀이
 public static void answer1(Scanner sc) {
-
+	FruitSeller seller = new FruitSeller(20);
+	FruitBuyer buyer = new FruitBuyer(10000);
+	
+	seller.showSaleResult();
+	buyer.showBuyResult();
+	
+	seller.saleApple(buyer, 2000);
+	
+	seller.showSaleResult();
+	buyer.showBuyResult();
 }
 
 // 2번 문제에 대한 풀이
 public static void answer2(Scanner sc) {
-
+	ChineseRestaurant rest = 
+			new ChineseRestaurant(sc, "천안문", 
+					new String[]{"짜장면", "짬뽕", "탕수육",
+								"라조기", "유산슬", "유린기",
+								"해물떡볶이", "우동"});
+	
+	rest.viewMenu();
+	rest.selectFood();
+	rest.deliveryFood();
 }
 
 // 3번 문제에 대한 풀이
@@ -160,7 +182,9 @@ public static void main(String[] args) {
 		default:
 			System.out.println("번호를 잘 못 입력했습니다.");
 			break;
-		}			
+		}	
+		sc.nextLine();
+		sc.nextLine();
 	}
 
 	System.out.println("Program End~");
