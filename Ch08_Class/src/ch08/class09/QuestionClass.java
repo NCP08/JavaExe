@@ -5,6 +5,8 @@ import java.util.Scanner;
 import ch08.class09.answer01.FruitBuyer;
 import ch08.class09.answer01.FruitSeller;
 import ch08.class09.answer02.ChineseRestaurant;
+import ch08.class09.answer03.PearBuyer;
+import ch08.class09.answer03.PearSeller;
 
 
 /*
@@ -132,7 +134,16 @@ public static void answer2(Scanner sc) {
 
 // 3번 문제에 대한 풀이
 public static void answer3(Scanner sc) {
-
+	PearSeller seller = new PearSeller(20);
+	PearBuyer buyer = new PearBuyer(10000);
+	
+	seller.showSaleResult();
+	buyer.showBuyResult();
+	
+	buyer.buyPear(seller, 5000);
+	
+	seller.showSaleResult();
+	buyer.showBuyResult();
 }
 
 // 4번 문제에 대한 풀이
