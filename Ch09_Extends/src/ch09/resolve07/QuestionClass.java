@@ -2,6 +2,13 @@ package ch09.resolve07;
 
 import java.util.Scanner;
 
+import ch09.resolve07.answer01.*;
+
+//import ch09.resolve07.answer01.Add;
+//import ch09.resolve07.answer01.Sub;
+//import ch09.resolve07.answer01.Mul;
+//import ch09.resolve07.answer01.Div;
+
 
 /*
 1. 클래스 Add
@@ -81,6 +88,7 @@ public class QuestionClass {
 			+ "     2차 놀이에서 어린이2는 어린이 1의 구슬 7개를 획득한다\r\n"
 			+ "     마지막으로 각각의 어린이가 보유하고 있는 구슬의 수를 출력한다\r\n"
 			+ "     프로그램을 종료한다.\r\n"
+			+ "6. Program End.\r\n"
 			+ "";
 	
 	System.out.println("\n\n\n------------------------------------");
@@ -102,7 +110,20 @@ public static int getSelectMenu(Scanner sc) {
 
 // 1번 문제에 대한 풀이
 public static void answer1(Scanner sc) {
-
+	Add add = new Add();
+	Sub sub = new Sub();
+	Mul mul = new Mul();
+	Div div = new Div();
+	
+	add.setValue(100, 20);
+	sub.setValue(100, 20);
+	mul.setValue(100, 20);
+	div.setValue(100, 20);
+	
+	System.out.println("add.calculate()=" + add.calculate());
+	System.out.println("sub.calculate()=" + sub.calculate());
+	System.out.println("mul.calculate()=" + mul.calculate());
+	System.out.println("div.calculate()=" + div.calculate());
 }
 
 // 2번 문제에 대한 풀이
@@ -162,7 +183,10 @@ public static void main(String[] args) {
 		default:
 			System.out.println("번호를 잘 못 입력했습니다.");
 			break;
-		}			
+		}		
+		
+		sc.nextLine();
+		sc.nextLine();
 	}
 
 	System.out.println("Program End~");
