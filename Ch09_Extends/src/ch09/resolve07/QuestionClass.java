@@ -1,5 +1,6 @@
 package ch09.resolve07;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import ch09.resolve07.answer01.Add;
@@ -7,6 +8,7 @@ import ch09.resolve07.answer01.Div;
 import ch09.resolve07.answer01.Mul;
 import ch09.resolve07.answer01.Sub;
 import ch09.resolve07.answer02.Triangle;
+import ch09.resolve07.answer03.ArrayUtility;
 
 //import ch09.resolve07.answer01.Add;
 //import ch09.resolve07.answer01.Sub;
@@ -144,12 +146,21 @@ public static void answer2(Scanner sc) {
 
 // 3번 문제에 대한 풀이
 public static void answer3(Scanner sc) {
-
+	int[] intArr = new int[] {31, 11, 9, 99, 2};
+	double[] dArr = ArrayUtility.intToDouble(intArr);
+	System.out.println(Arrays.toString(intArr));
+	System.out.println(Arrays.toString(dArr));
+	
+	double[] dArr1 = new double[] {2.1, 3.4, 5.5, 7.9, 1.2};
+	int[] intArr1 = ArrayUtility.doubleToInt(dArr1);
+	System.out.println(Arrays.toString(dArr1));
+	System.out.println(Arrays.toString(intArr1));
 }
 
 // 4번 문제에 대한 풀이
 public static void answer4(Scanner sc) {
 
+	
 }
 
 // 5번 문제에 대한 풀이
