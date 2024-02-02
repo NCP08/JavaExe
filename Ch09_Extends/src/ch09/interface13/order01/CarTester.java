@@ -15,14 +15,14 @@ public class CarTester {
 	public void setCar(ICar car) {
 		this.car = car;
 	}
-	public int onOffTest() {
+	public int onOffTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
 			car.turnOn();
 			car.turnOff();			
 		}
 		return (int)Math.random()*100;	//0이상~99이하
 	}
-	public int speedTest() {
+	public int speedTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
 			car.accel();
 			car.accel();
@@ -30,7 +30,7 @@ public class CarTester {
 		}
 		return (int)Math.random()*50 + 50;	//50이상~99이하
 	}
-	public int footBreakTest() {
+	public int footBreakTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
 			car.accel();
 			car.footBreak();
@@ -39,7 +39,7 @@ public class CarTester {
 		}
 		return (int)Math.random()*50 + 50;	//50이상~99이하
 	}
-	public int driveTest() {
+	public int driveTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
 			car.turnOn();
 			car.accel();
