@@ -21,7 +21,7 @@ public class Answer1 implements IQuestionAnswer {
 				+ "\r\n"
 				+ "                  프린터\r\n"
 				+ "\r\n"
-				+ "잉크젯프린터             레이저프린터";
+				+ "잉크젯프린터             레이저프린터\r\n\r\n";
 		
 		System.out.println(question);
 	}
@@ -31,6 +31,11 @@ public class Answer1 implements IQuestionAnswer {
 		sc.nextLine();		// Enter치기 전까지 멈춰 있음
 		System.out.println("1번 문제 실행~");
 		sc.nextLine();		// Enter치기 전까지 멈춰 있음
+	}
+
+	@Override
+	public boolean isRun() {
+		return true;
 	}
 
 }
