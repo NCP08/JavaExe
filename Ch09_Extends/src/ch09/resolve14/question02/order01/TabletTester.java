@@ -1,55 +1,36 @@
 package ch09.resolve14.question02.order01;
 
 import ch09.interface13.ICar;
+import ch09.resolve14.question02.ITablet;
 
 public class TabletTester {
 	private final int TEST_NUM = 3;
-	private ICar car;
+	private ITablet tablet;
 	
-	/* 외부에서 주입
-	 * CarTest는 ICar에 의존적이다.
-	 */
-	public TabletTester(ICar car) {
-		this.car = car;
+	public TabletTester(ITablet tablet) {
+		this.tablet = tablet;
 	}
 	public TabletTester() {
 		
 	}
-	public void setCar(ICar car) {
-		this.car = car;
+	public void setTablet(ITablet tablet) {
+		this.tablet = tablet;
 	}
-	public int onOffTest() throws InterruptedException {
+	public int movieTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
-			car.turnOn();
-			car.turnOff();			
+			tablet.movie();
 		}
 		return (int)(Math.random()*50) + 50;	//0이상~99이하
 	}
-	public int speedTest() throws InterruptedException {
+	public int musicTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
-			car.accel();
-			car.accel();
-			car.accel();
+			tablet.music();
 		}
 		return (int)(Math.random()*50) + 50;	//50이상~99이하
 	}
-	public int footBreakTest() throws InterruptedException {
+	public int readBookTest() throws InterruptedException {
 		for(int i=0;i<TEST_NUM;i++) {
-			car.accel();
-			car.footBreak();
-			car.footBreak();
-			car.footBreak();
-		}
-		return (int)(Math.random()*50) + 50;	//50이상~99이하
-	}
-	public int driveTest() throws InterruptedException {
-		for(int i=0;i<TEST_NUM;i++) {
-			car.turnOn();
-			car.accel();
-			car.accel();
-			car.footBreak();
-			car.footBreak();
-			car.turnOff();
+			tablet.readBook();
 		}
 		return (int)(Math.random()*50) + 50;	//50이상~99이하
 	}
