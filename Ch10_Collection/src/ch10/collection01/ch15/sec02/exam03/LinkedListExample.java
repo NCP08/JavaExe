@@ -22,7 +22,7 @@ public class LinkedListExample {
 			list1.add(0, String.valueOf(i));
 		}
 		endTime = System.nanoTime();
-		System.out.printf("%-17s %8d ns \n", "ArrayList 걸린 시간: ", (endTime-startTime) );
+		System.out.printf("%-17s %8d ns \n", "ArrayList 걸린 시간: \t", (endTime-startTime) );
 
 		//LinkedList 컬렉션에 저장하는 시간 측정
 		startTime = System.nanoTime();
@@ -30,6 +30,6 @@ public class LinkedListExample {
 			list2.add(0, String.valueOf(i));
 		}
 		endTime = System.nanoTime();
-		System.out.printf("%-17s %8d ns \n", "LinkedList 걸린 시간: ", (endTime-startTime) );
+		System.out.printf("%-17s %8d ns \n", "LinkedList 걸린 시간: \t", (endTime-startTime) );
 	}
 }
