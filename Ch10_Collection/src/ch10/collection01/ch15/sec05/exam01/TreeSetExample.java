@@ -10,7 +10,7 @@ import java.util.TreeSet;
  * 
  * '데이터 입력 시 정렬과정을 거치게 되므로 list보다 입력 속도가 느리다'
  * '특정 값 검색시 Hash보다는 느리지만 list보다는 훨씬 빠르다'
- * '노드의 좌측/우측 명백하게 작으냐 크냐로 구분되므로 비교 검색이 가장 좋은 구조'
+ * '노드의 좌측/우측 명백하게 작으냐 크냐로 구분되므로 비교/범위 검색이 가장 좋은 구조'
  * '정렬이 일어나므로 순서보장 안된다'
  * 
  *  값자체를 비교하면 TreeSet
@@ -48,6 +48,7 @@ public class TreeSetExample {
 			System.out.print(s + " ");
 		}
 		System.out.println("\n");
+
 		
 		//범위 검색( 80 <= )
 		NavigableSet<Integer> rangeSet = scores.tailSet(80, true);
