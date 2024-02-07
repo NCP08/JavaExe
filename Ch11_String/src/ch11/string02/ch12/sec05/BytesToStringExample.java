@@ -7,7 +7,7 @@ public class BytesToStringExample {
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		String data = "자바";
 		
-		byte[] arr1 = data.getBytes();
+		byte[] arr1 = data.getBytes();	// utf-8, data.getBytes("UTF-8")
 		System.out.println("arr1: " + Arrays.toString(arr1));;
 		
 		String str1 = new String(arr1);
