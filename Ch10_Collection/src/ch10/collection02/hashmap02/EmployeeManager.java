@@ -7,10 +7,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class EmployeeManager {
-//	private final int EMP_NUM = 100;	// 100명 사원이 최대
-//	// Employee의 자식객체들을 저장
-//	private Employee[] empArr = new Employee[EMP_NUM];
-//	private int numOfEmp = 0;	// 저장된 사원객체 수, 다음 사원이 저장될 index
 	private Map<String, Employee> empMap = new HashMap<>();
 	private Scanner sc = new Scanner(System.in);
 	
