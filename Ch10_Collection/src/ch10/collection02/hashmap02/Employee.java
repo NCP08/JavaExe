@@ -1,5 +1,7 @@
 package ch10.collection02.hashmap02;
 
+import java.util.Objects;
+
 public abstract class Employee {
 	protected String empno;		// 사번
 	protected String name;		// 이름

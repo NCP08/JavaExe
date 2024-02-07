@@ -1,12 +1,17 @@
 package ch10.collection02.hashmap02;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class EmployeeManager {
-	private final int EMP_NUM = 100;	// 100명 사원이 최대
-	// Employee의 자식객체들을 저장
-	private Employee[] empArr = new Employee[EMP_NUM];
-	private int numOfEmp = 0;	// 저장된 사원객체 수, 다음 사원이 저장될 index
+//	private final int EMP_NUM = 100;	// 100명 사원이 최대
+//	// Employee의 자식객체들을 저장
+//	private Employee[] empArr = new Employee[EMP_NUM];
+//	private int numOfEmp = 0;	// 저장된 사원객체 수, 다음 사원이 저장될 index
+	private Map<String, Employee> empMap = new HashMap<>();
 	private Scanner sc = new Scanner(System.in);
 	
 	private int viewMenu() {
@@ -63,42 +68,64 @@ public class EmployeeManager {
 		return emp;
 	}
 	private boolean saveEmployee(Employee emp) {
-		boolean isSave = true;
+
+		Employee ret = empMap.put(emp.empno, emp);
+		if(ret==null)
+			System.out.println("새로 저장합니다.");
+		else
+			System.out.println("기존의 공간에 덮어씁니다.");
 		
-		if(this.numOfEmp < EMP_NUM) {
-			this.empArr[this.numOfEmp] = emp;
-			this.numOfEmp++;
-			isSave = true;
-		}else {
-			isSave = false;
-		}
-		
-		return isSave;
+		return true;
 	}
 	private void viewAllEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			this.empArr[i].showEmployeeInfo();
+		Set<String> keySet = empMap.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		int i = 0;
+		while(keyIterator.hasNext()) {
+			i++;
+			String k = keyIterator.next();
+			Employee emp = empMap.get(k);
+			System.out.println("********* " + i + " *********");
+			emp.showEmployeeInfo();
 		}
 	}
 	private void viewRegEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof RegularEmployee)
-				this.empArr[i].showEmployeeInfo();
+		Set<String> keySet = empMap.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		int i = 0;
+		while(keyIterator.hasNext()) {
+			String k = keyIterator.next();
+			Employee emp = empMap.get(k);
+			if(emp instanceof RegularEmployee) {
+				System.out.println("********* " + (++i) + " *********");
+				emp.showEmployeeInfo();				
+			}
 		}
 	}
 	private void viewTempEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof TempEmployee)
-				this.empArr[i].showEmployeeInfo();
+		Set<String> keySet = empMap.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		int i = 0;
+		while(keyIterator.hasNext()) {
+			String k = keyIterator.next();
+			Employee emp = empMap.get(k);
+			if(emp instanceof TempEmployee) {
+				System.out.println("********* " + (++i) + " *********");
+				emp.showEmployeeInfo();				
+			}
 		}
 	}
 	private void viewPartTimeEmployeeInfo() {
-		for(int i=0;i<this.numOfEmp;i++) {
-			Employee emp = this.empArr[i];
-			if(emp instanceof PartTimeEmployee)
-				this.empArr[i].showEmployeeInfo();
+		Set<String> keySet = empMap.keySet();
+		Iterator<String> keyIterator = keySet.iterator();
+		int i = 0;
+		while(keyIterator.hasNext()) {
+			String k = keyIterator.next();
+			Employee emp = empMap.get(k);
+			if(emp instanceof PartTimeEmployee) {
+				System.out.println("********* " + (++i) + " *********");
+				emp.showEmployeeInfo();				
+			}
 		}
 	}
 	public void run() {
@@ -144,7 +171,7 @@ public class EmployeeManager {
 			if(emp != null) {
 				boolean isSave = saveEmployee(emp);
 				if(!isSave)
-					System.out.println("더 이상 저장 공간이 없습니다.");
+					System.out.println("오류가 발생했습니다.");
 			}
 		}
 		System.out.println("Program Exit...");
