@@ -7,6 +7,6 @@ public class ToStringExample {
 		String strObj = myPhone.toString();
 		System.out.println(strObj);
 		
-		System.out.println(myPhone);
+		System.out.println(myPhone);	// myPhone.toString()
 	}
 }
