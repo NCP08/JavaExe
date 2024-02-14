@@ -30,6 +30,12 @@ public class StreamCalc {
 		strmF.forEach(s->System.out.print(s + ", "));
 		System.out.println();
 		
+		/* 한번 사용한 스트림은 재사용 불가능(내부 데이터 모두 흘려보냈다)
+		System.out.println("------------------------------");
+		strmF.forEach(s->System.out.print(s + ", "));
+		System.out.println();
+		*/
+		
 		nameList.stream()					// 1) 스트림객체
 				.filter(s->s.length() >= 5)	// 2) 중간연산(참일 때 새로운 스트림)
 				.filter(s->s.length() < 10)
