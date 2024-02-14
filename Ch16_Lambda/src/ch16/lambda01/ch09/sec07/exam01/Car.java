@@ -11,6 +11,11 @@ public class Car {
 			System.out.println("익명 자식 Tire 객체 1이 굴러갑니다.");
 		}
 	};
+	
+	public void TireInfo() {
+		System.out.println(tire1);
+		System.out.println(tire2);
+	}
 
 	//메소드(필드 이용)
 	public void run1() {
