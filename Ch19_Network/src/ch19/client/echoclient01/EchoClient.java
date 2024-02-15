@@ -32,6 +32,7 @@ public class EchoClient {
 			
 			String line;
 			while(true) {
+				System.out.print("입력 >> ");
 				line = keyboard.readLine();
 				if(line.equals("quit"))
 					break;
