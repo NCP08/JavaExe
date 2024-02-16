@@ -35,7 +35,22 @@ public class JsonChatClient {
 			sendId(scan, pw);
 			
 			// 2) 메뉴를 선택해서 원하는 요청을 서버로 보낸다.
-			
+			boolean isRun = true;
+			while(isRun) {
+				int sel = getSelectMenu(scan);
+				switch(sel) {
+				case ServiceMenu.ALL_CHAT:
+					break;
+				case ServiceMenu.ONE_CHAT:
+					break;
+				case ServiceMenu.CALC_ARITH:
+					break;
+				case ServiceMenu.EXIT:
+					isRun = false;
+					break;
+				}
+			}
+			System.out.println("Client 프로그램 종료~");
 			
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -49,6 +64,16 @@ public class JsonChatClient {
 			scan.close();
 		}
 		
+	}
+	
+	public static int getSelectMenu(Scanner sc) {
+		System.out.println("1. 전체 채팅");
+		System.out.println("2. 1:1 채팅");
+		System.out.println("3. 사칙연산");
+		System.out.println("4. exit");
+		System.out.print("번호 입력 >> ");
+		int sel = Integer.parseInt(sc.nextLine());
+		return sel;
 	}
 	
 	 /*   <id등록>
