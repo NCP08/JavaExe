@@ -77,11 +77,10 @@ public class JsonChatServer {
  *     [요청]
  *     cmd:ALLCHAT
  *     id:{id값}
- *     youid:all
  *     msg:{문자메시지}
  *     
  *     [응답]
- *     cmd:ID
+ *     cmd:ALLCHAT
  *     ack:ok(성공), fail(실패)
  *     
  *     [전송]
@@ -96,7 +95,7 @@ public class JsonChatServer {
  *     msg:{문자메시지}
  *     
  *     [응답]
- *     cmd:ID
+ *     cmd:ONECHAT
  *     ack:ok(성공), fail(실패)
  *     
  *     [전송]
@@ -153,7 +152,7 @@ class WorkerThread extends Thread {
 			String id = packetObj.getString("id");
 			ht.put(id, this.socket);	// 해시테이블에 id와 socket을 등록		
 			// 응답			
-			ackObj.put("cmd", id);
+			ackObj.put("cmd", "ID");
 			ackObj.put("ack", "ok");
 			// Json Obj -> 문자열
 			String ack = ackObj.toString();
@@ -182,14 +181,37 @@ class WorkerThread extends Thread {
 			pw.println(ack);
 			pw.flush();
 		}else if(cmd.equals("ALLCHAT")) {
+			String id = packetObj.getString("id");
+			String msg = packetObj.getString("msg");
 			
+			/* 클라이언트 응답 패킷 */
+			// 응답
+			ackObj.put("cmd", "ALLCHAT");
+			ackObj.put("ack", "ok");
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+			
+			// 전체 전송 패킷
+			JSONObject broadObj = new JSONObject();
+			broadObj.put("cmd", "BROADCHAT");
+			broadObj.put("id", id);
+			broadObj.put("msg", msg);
+			String strBroad = broadObj.toString();
+			// 전체 전송
+			broadcast(strBroad);
 		}else if(cmd.equals("ONECHAT")) {
 			
-		}
-		
-		
-
+		}		
 	}
+	private void broadcast(String packet) {
+		
+	}
+	
 	private double arith(String op, double val1, double val2) {
 		double result=0.;
 		switch(op) {
