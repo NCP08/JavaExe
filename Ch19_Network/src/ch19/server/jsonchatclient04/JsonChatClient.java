@@ -101,7 +101,13 @@ class ReceiveThread extends Thread{
 		String cmd = packetObj.getString("cmd");
 		// 서버의 id처리에 대한 응답
 		if(cmd.equals("ID")) {
-			
+			String ack = packetObj.getString("ack");
+			if(ack.equals("ok"))
+				System.out.println("ID 등록 성공");
+			else if(ack.equals("fail"))
+				System.out.println("ID 등록 실패");
+			else
+				System.out.printf("ID 등록 %s\n", ack);
 		}
 		// 서버의 사칙연산 결과 응답
 		else if(cmd.equals("ARITH")) {
