@@ -11,6 +11,8 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.json.JSONObject;
 
@@ -99,7 +101,7 @@ public class JsonChatServer {
  *     ack:ok(성공), fail(실패)
  *     
  *     [전송]
- *     cmd:UNIQCHAT
+ *     cmd:UNICHAT
  *     id:{id값}
  *     msg:{문자메시지}
  * */
@@ -196,20 +198,70 @@ class WorkerThread extends Thread {
 			pw.println(ack);
 			pw.flush();
 			
-			// 전체 전송 패킷
+			// 특정 yourid 사용 클라이언트에 전송 패킷
 			JSONObject broadObj = new JSONObject();
-			broadObj.put("cmd", "BROADCHAT");
+			broadObj.put("cmd", "ALLCHAT");
 			broadObj.put("id", id);
 			broadObj.put("msg", msg);
 			String strBroad = broadObj.toString();
 			// 전체 전송
 			broadcast(strBroad);
 		}else if(cmd.equals("ONECHAT")) {
+			String id = packetObj.getString("id");
+			String yourid = packetObj.getString("yourid");
+			String msg = packetObj.getString("msg");
 			
+			/* 클라이언트 응답 패킷 */
+			// 응답
+			ackObj.put("cmd", "ONECHAT");
+			ackObj.put("ack", "ok");
+			// Json Obj -> 문자열
+			String ack = ackObj.toString();
+			// 클라이언트한테 전송
+			OutputStream out = this.socket.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(ack);
+			pw.flush();
+			
+			// 전송 패킷 구성
+			JSONObject uniObj = new JSONObject();
+			uniObj.put("cmd", "UNICHAT");
+			uniObj.put("id", id);
+			uniObj.put("msg", msg);
+			String strUni = uniObj.toString();
+			// yourid 클라이언트한테 전송
+			unicast(strUni, yourid);
 		}		
 	}
-	private void broadcast(String packet) {
+	
+	// yourId에 해당하는 접속자를 찾아서 패킷을 전송
+	private void unicast(String packet, String yourid) throws IOException {
+		Socket sock = (Socket) ht.get(yourid);
 		
+		OutputStream out = sock.getOutputStream();
+		PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+		pw.println(packet);
+		pw.flush();
+	}
+	
+	// 접속 클라이언트를 제외한 모든 접속자한테 패킷을 전송
+	private void broadcast(String packet) throws IOException {
+		// 현재 Hashtable에 등록된 모든 사용자의 id와 Socket을 가져온다.
+		Set<String> idSet = ht.keySet();
+		Iterator<String> idIter = idSet.iterator();
+		while(idIter.hasNext()) {
+			String id = idIter.next();
+			Socket sock = (Socket) ht.get(id);
+			
+			// 클라이언트한테는 보낼 필요가 없으므로
+			if(sock==this.socket)
+				continue;
+			
+			OutputStream out = sock.getOutputStream();
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(out));
+			pw.println(packet);
+			pw.flush();
+		}
 	}
 	
 	private double arith(String op, double val1, double val2) {
