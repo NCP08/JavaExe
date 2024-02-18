@@ -1,1 +1,1 @@
-java.exe D:\PlayWorks\JavaExe\Ch19_Network\bin\ch19\client\jsonchatclient04\JsonChatClient.class
+java.exe -jar -Dfile.encoding=euc-kr jsonChatClient.jar

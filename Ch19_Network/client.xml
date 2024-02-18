@@ -2,10 +2,10 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>console</headerType>
-  <jar>D:\PlayWorks\JavaExe\Ch19_Network\jsonChatClient.jar</jar>
-  <outfile>D:\PlayWorks\JavaExe\Ch19_Network\jsonChatClient.exe</outfile>
+  <jar>C:\PlayWork\JavaExe\Ch19_Network\jsonChatClient.jar</jar>
+  <outfile>C:\PlayWork\JavaExe\Ch19_Network\jsonChatClient.exe</outfile>
   <errTitle></errTitle>
-  <cmdLine></cmdLine>
+  <cmdLine>-Dfile.encoding=euc-kr</cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl></downloadUrl>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\PlayWorks\JavaExe\Ch19_Network\client.ico</icon>
+  <icon>C:\PlayWork\JavaExe\Ch19_Network\client.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>false</requiresJdk>

@@ -122,7 +122,13 @@ public class JsonChatClient {
 		sendReqIdList(pw, id);
 		boolean isRun = true;
 		while(isRun) {
-			if(JsonChatClient.mainState != ClientState.STATE_ONE_CHAT) {
+			if(JsonChatClient.mainState == ClientState.STATE_ONE_CHAT_QUIT) {
+				isRun = false;
+				JsonChatClient.mainState = ClientState.NONE;
+				System.out.println("1:1 탈출 - 2");
+				break;
+			}
+			if(JsonChatClient.mainState != ClientState.STATE_ONE_CHAT_1) {
 				Thread.sleep(10);
 				continue;
 			}
@@ -130,24 +136,30 @@ public class JsonChatClient {
 			Thread.sleep(200);
 			System.out.print("전송할 id >> ");
 			String yourid = sc.nextLine();
-			System.out.print("전송 메시지 (quit는 종료) >> ");
-			String msg = sc.nextLine();
-			if(msg.equals("quit")) {
-				isRun = false;
-				JsonChatClient.mainState = ClientState.NONE;
-				break;
-			}				
-			
-			JSONObject packetObj = new JSONObject();
-			packetObj.put("cmd", "ONECHAT");
-			packetObj.put("id", id);
-			packetObj.put("yourid", yourid);
-			packetObj.put("msg", msg);
-			
-			String packet = packetObj.toString();
-			
-			pw.println(packet);
-			pw.flush();			
+			JsonChatClient.mainState = ClientState.STATE_ONE_CHAT_2;
+			boolean isRun2 = true;
+			while(isRun2) {
+				System.out.print("전송 메시지 (quit는 종료) >> ");
+				String msg = sc.nextLine();
+				if(msg.equals("quit")) {
+					isRun2 = false;
+					JsonChatClient.mainState = ClientState.STATE_ONE_CHAT_QUIT;
+					System.out.println("1:1 탈출 - 1");
+					break;
+				}				
+				
+				JSONObject packetObj = new JSONObject();
+				packetObj.put("cmd", "ONECHAT");
+				packetObj.put("id", id);
+				packetObj.put("yourid", yourid);
+				packetObj.put("msg", msg);
+				
+				String packet = packetObj.toString();
+				
+				pw.println(packet);
+				pw.flush();					
+			}
+		
 		}		
 	}
 	
@@ -306,7 +318,7 @@ class ReceiveThread extends Thread{
 				System.out.printf("[서버 응답] ALL 채팅 전송 %s\n", ack);
 		}
 		// 서버의 1:1 채팅에 대한 응답
-		else if(JsonChatClient.mainState==ClientState.STATE_ONE_CHAT && cmd.equals("ONECHAT")) {
+		else if(JsonChatClient.mainState==ClientState.STATE_ONE_CHAT_1 && cmd.equals("ONECHAT")) {
 			String ack = packetObj.getString("ack");
 			if(ack.equals("ok"))
 				System.out.println("[서버 응답] 1:1 채팅 전송 성공");
@@ -320,14 +332,13 @@ class ReceiveThread extends Thread{
 			String id = packetObj.getString("id");
 			
 			String msg = packetObj.getString("msg");
-			System.out.printf("전체 채팅 메시지 [%s] %s\n", id, msg);
+			System.out.printf("\n전체 채팅 메시지 [%s] %s\n", id, msg);
 		}
 		// 특정 사람이 나의 id로 보낸 메시지 서버가 전송
-		else if((JsonChatClient.mainState==ClientState.STATE_ONE_CHAT || JsonChatClient.mainState==ClientState.STATE_ALL_CHAT) && cmd.equals("UNICHAT")) {
+		else if((JsonChatClient.mainState==ClientState.STATE_ONE_CHAT_2 || JsonChatClient.mainState==ClientState.STATE_ALL_CHAT) && cmd.equals("UNICHAT")) {
 			String id = packetObj.getString("id");
-			String yourid = packetObj.getString("yourid");
 			String msg = packetObj.getString("msg");
-			System.out.printf("1:1 채팅 메시지 [%s -> %s] %s\n", id, yourid, msg);
+			System.out.printf("\n>>>>>>>>>>>>> 1:1 채팅 메시지 [%s -> ] %s\n", id, msg);
 		}
 		// 서버한테 전체 접속자 id 리스트 요청
 		else if(JsonChatClient.mainState==ClientState.STATE_REQIDLIST && cmd.equals("REQIDLIST")) {
@@ -336,7 +347,7 @@ class ReceiveThread extends Thread{
 				System.out.printf("접속 ID 목록 : %d. %s\n", i+1, idList.get(i));
 			}
 
-			JsonChatClient.mainState = ClientState.STATE_ONE_CHAT;
+			JsonChatClient.mainState = ClientState.STATE_ONE_CHAT_1;
 		}
 		else if((JsonChatClient.mainState==ClientState.STATE_QUIT) && cmd.equals("QUIT")) {
 			String id = packetObj.getString("id");
