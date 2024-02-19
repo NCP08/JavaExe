@@ -150,6 +150,7 @@ class WorkerThread extends Thread {
 			while(true) {
 				/*client가 json오브젝트를 string으로 변환해서 보낸 것을 수신*/
 				String line = br.readLine();
+				//System.out.println("raw data=" + line);
 				if(line == null)
 					break;
 				/*json패킷을 해석해서 알맞은 처리를 한다.
@@ -166,6 +167,7 @@ class WorkerThread extends Thread {
 	}
 	
 	private void processPacket(JSONObject packetObj) throws IOException {
+		// 클라이언트에 응답을 하기 위한 json 오브젝트
 		JSONObject ackObj = new JSONObject();
 		// 어떤 종류의 패킷을 보냈는지 분류하기 위한 정보
 		String cmd = packetObj.getString("cmd");

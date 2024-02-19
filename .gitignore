@@ -1,1 +1,5 @@
 /.metadata/
+/.recommenders/
+.settings/
+*.mp4
+*.exe
